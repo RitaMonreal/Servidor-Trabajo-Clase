@@ -5,56 +5,16 @@ class Server{
     constructor(){
         this.app = express();
         this.port = process.env.PORT;
+
+        this.usersPath = "/api/users";
+        this.productsPath = "/api/products";
+
         this.routes();
     }
 
     routes(){
-
-        //METODOS HTTP
-        this.app.get("/api",(req, res)=>{
-            //res.send("Hola mundo desde la raiz");
-             res.status(200).json({
-                msg: "Api GET",
-             //   data: [1,2,3]
-             });
-        });
-        
-       /* this.app.get("/hola-mundo",(req, res)=>{
-            res.send("Hola mundo desde la otra ruta");
-        });*/
-
-        this.app.post("/api",(req, res)=>{
-            //res.send("Hola mundo desde la raiz");
-             res.status(200).json({
-                msg: "Api POST",
-             //   data: [1,2,3]
-             });
-        });
-
-        this.app.delete("/api",(req, res)=>{
-            //res.send("Hola mundo desde la raiz");
-             res.status(200).json({
-                msg: "Api DELETE",
-             //   data: [1,2,3]
-             });
-        });
-        
-        this.app.put("/api",(req, res)=>{
-            //res.send("Hola mundo desde la raiz");
-             res.status(200).json({
-                msg: "Api PUT",
-             //   data: [1,2,3]
-             });
-        });
-
-        this.app.patch("/api",(req, res)=>{
-            //res.send("Hola mundo desde la raiz");
-             res.status(405).json({
-                msg: "Api PATCH",
-             //   data: [1,2,3]
-             });
-        });
-
+        this.app.use(this.usersPath, require("../routes/users"));
+        this.app.use(this.productsPath, require("../routes/products"));
 
         this.app.get("*",(req, res)=>{
             res.status(404).send("Error - ruta no encontrada");
