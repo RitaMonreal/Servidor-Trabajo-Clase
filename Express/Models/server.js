@@ -9,6 +9,9 @@ class Server{
         this.usersPath = "/api/users";
         this.productsPath = "/api/products";
 
+        //servidor preparado para vaciar datos a traves del request body en forms de json
+        this.app.use(express.json());
+
         this.routes();
     }
 
