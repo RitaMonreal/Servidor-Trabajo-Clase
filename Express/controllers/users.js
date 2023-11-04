@@ -1,13 +1,23 @@
 const {response, request} = require("express");
 
-const usersGet = (req, res = response) => {
+//http://localhost:8081/api/users?nombre=Carlos&edad=18
+const usersGet = (req = request, res = response) => {
+    const params = req.query;
+
     res.status(200).json({
         msg: "Api GET users - controller",
+        params
     });
 }
 
 const usersPost = (req = request, res = response) => {
 
+    /*
+{
+    "nombre": "Fernando",
+    "edad": -5
+}
+    */ 
     //1const body = req.body;
     const {nombre, edad} = req.body;
     let result ="";
@@ -40,9 +50,17 @@ const usersDelete = (req = request, res = response) => {
      });
 }
 
-const usersPut = (req, res = response) => {
+const usersPut = (req = request, res = response) => {
+
+    const id1 = req.body.id;
+    const id2 = req.params.id;
+    const id3 = req.query.id;
+
     res.status(200).json({
         msg: "Api PUT users - controller",
+        id1,
+        id2,
+        id3
      });
 }
 

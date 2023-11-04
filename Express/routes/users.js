@@ -12,9 +12,10 @@ router.get("/", usersGet);
 
 router.post("/", usersPost);
 
+//Estamos recibiendo de manera dinámica
 router.delete("/:id", usersDelete);
 
-router.put("/", usersPut);
+router.put("/:id", usersPut);
 
 router.patch("/", usersPatch);
 
