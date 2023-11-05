@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require("cors");
 
 class Server{
 
@@ -11,9 +12,7 @@ class Server{
         this.charactersPath = "/api/characters";
         this.programsPath = "/api/programs";
 
-        //servidor preparado para vaciar datos a traves del request body en forms de json
-        this.app.use(express.json());
-
+        this.middlewares();
         this.routes();
     }
 
@@ -26,6 +25,12 @@ class Server{
         this.app.get("*",(req, res)=>{
             res.status(404).send("Error - ruta no encontrada");
         });
+    }
+
+    middlewares(){
+        //servidor preparado para vaciar datos a traves del request body en forms de json
+        this.app.use(express.json());
+        this.app.use(cors());
     }
     
     listen(){
