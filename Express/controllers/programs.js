@@ -33,9 +33,20 @@ let programList = [
     "image":"https://m.media-amazon.com/images/M/MV5BMGFiZGI4Y2ItMzkzOC00OTE5LThlZDgtNzE1YTdmNTA5ZTZkL2ltYWdlL2ltYWdlXkEyXkFqcGdeQXVyMTEwMTkwOTI@._V1_.jpg"
   },
 ];
+
+
 const getAllPrograms = (req = request, res = response) =>{
+
+  const {searchTerm, sortBy} = req.query;
+
+    let response = programList
+
+    if(searchTerm){
+      response = response.filter(program => 
+        program.title.toLocaleLowerCase().includes(searchTerm.toLocaleLowerCase()));
+    }
     res.status(200).json({
-       programList
+       programList: response
     });
 }
 
