@@ -37,12 +37,19 @@ const getAllCharacters = (req = request, res = response) =>{
 
     //estruturar parametros que van a llegar en la busqueda lo estamos sacando del req.query
     //es opcional
-    const {searchTerm} = req.query;
+    const {searchTerm, sortDesc} = req.query;
 
     let response = characterList
 
     if(searchTerm){
-      response = response.filter(character => character.name.toLocaleLowerCase().includes(searchTerm.toLocaleLowerCase()));
+      response = response.filter(character => 
+        character.name.toLocaleLowerCase().includes(searchTerm.toLocaleLowerCase()));
+    }
+
+    if (sortDesc === 'true') {
+      response.sort((a, b) => b.id - a.id); 
+    }else {
+      response.sort((a, b) => a.id - b.id); 
     }
 
     
