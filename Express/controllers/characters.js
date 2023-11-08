@@ -38,6 +38,7 @@ const getAllCharacters = (req = request, res = response) =>{
     //estruturar parametros que van a llegar en la busqueda lo estamos sacando del req.query
     //es opcional
     const {searchTerm, sortDesc} = req.query;
+  
 
     let response = characterList
 

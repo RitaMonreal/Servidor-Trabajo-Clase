@@ -39,12 +39,18 @@ const getAllPrograms = (req = request, res = response) =>{
 
   const {searchTerm, sortBy} = req.query;
 
+
     let response = programList
 
     if(searchTerm){
       response = response.filter(program => 
         program.title.toLocaleLowerCase().includes(searchTerm.toLocaleLowerCase()));
     }
+
+    if (sortBy === 'true') {
+      response = response.slice().sort((a, b) => a.title.localeCompare(b.title));
+    }
+
     res.status(200).json({
        programList: response
     });
