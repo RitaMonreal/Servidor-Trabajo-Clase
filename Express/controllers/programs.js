@@ -65,7 +65,30 @@ const getProgramById = (req = request, res = response)=>{
  });
 }
 
+const createCharacter = (req = request, res = response)=>{
+  const {id, title, image} = req.body;
+
+  if(!id || !title || !image){
+    res.status(400).json({
+      msg: "Datos inválidos"
+   });
+   
+   //Evitar que lo demas proceda si no es correcto
+   return;
+  }
+
+  programList.push({
+    id,
+    title,
+    image
+  });
+
+  res.status(200).json({
+    msg: "Registro insertado con éxito"
+ });
+}
 module.exports = {
     getAllPrograms,
-    getProgramById
+    getProgramById, 
+    createCharacter
 }
