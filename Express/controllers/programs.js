@@ -87,8 +87,54 @@ const createCharacter = (req = request, res = response)=>{
     msg: "Registro insertado con éxito"
  });
 }
+
+const updateProgramById = (req = request, res = response) => {
+  const id = req.params.id;
+  const { title, image } = req.body;
+
+  const programIndex = programList.findIndex(program => program.id == id);
+
+  if (programIndex === -1) {
+    res.status(404).json({
+      msg: "Programa no encontrado"
+    });
+    return;
+  }
+
+  programList[programIndex].title = title || programList[programIndex].title;
+  programList[programIndex].image = image || programList[programIndex].image;
+
+  res.status(200).json({
+    msg: "Programa actualizado con éxito",
+    program: programList[programIndex]
+  });
+}
+
+const deleteCharacter = (req = request, res = response) => {
+  const id = req.params.id;
+
+  const programIndex = programList.findIndex(program => program.id == id);
+
+  if (programIndex === -1) {
+    res.status(404).json({
+      msg: "Programa no encontrado"
+    });
+    return;
+  }
+
+  // Eliminar el programa de la lista
+  programList.splice(programIndex, 1);
+
+  res.status(200).json({
+    msg: "Programa eliminado con éxito"
+  });
+};
+
+
 module.exports = {
     getAllPrograms,
     getProgramById, 
-    createCharacter
+    createCharacter,
+    updateProgramById,
+    deleteCharacter
 }
