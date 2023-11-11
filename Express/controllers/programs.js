@@ -84,7 +84,8 @@ const createCharacter = (req = request, res = response)=>{
   });
 
   res.status(200).json({
-    msg: "Registro insertado con éxito"
+    msg: "Registro insertado correctamente",
+    //programList
  });
 }
 
@@ -106,11 +107,12 @@ const updateProgramById = (req = request, res = response) => {
 
   res.status(200).json({
     msg: "Programa actualizado con éxito",
-    program: programList[programIndex]
+    program: programList[programIndex],
+    //programList
   });
 }
 
-const deleteCharacter = (req = request, res = response) => {
+const deleteProgram = (req = request, res = response) => {
   const id = req.params.id;
 
   const programIndex = programList.findIndex(program => program.id == id);
@@ -122,11 +124,11 @@ const deleteCharacter = (req = request, res = response) => {
     return;
   }
 
-  // Eliminar el programa de la lista
   programList.splice(programIndex, 1);
 
   res.status(200).json({
-    msg: "Programa eliminado con éxito"
+    msg: "Programa eliminado correctamente",
+    //programList
   });
 };
 
@@ -136,5 +138,5 @@ module.exports = {
     getProgramById, 
     createCharacter,
     updateProgramById,
-    deleteCharacter
+    deleteProgram
 }
