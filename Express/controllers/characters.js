@@ -1,7 +1,8 @@
 const { response, request} = require("express");
+const Character = require = require("../Models/character");
 
 let characterList = [
-  {
+  /*{
     "id":1,
     "name": "Birdperson",
     "image": "https://rickandmortyapi.com/api/character/avatar/47.jpeg",  
@@ -30,14 +31,30 @@ let characterList = [
     "id":6,
     "name": "Gotron Pilot",
     "image": "https://rickandmortyapi.com/api/character/avatar/777.jpeg",
-  }
+  }*/
 ];
 
 const getAllCharacters = (req = request, res = response) =>{
 
+  const {searchTerm} = req.query;
+
+  Character.find({name: RegExp(searchTerm)}).then(
+    (result) =>{
+      res.status(200).json({
+        characterList: result
+    });
+    }
+  ).catch(
+    (error) => {
+      res.status(500).json({
+        msg: "Error al obtener los datos"
+    });
+    }
+  )
+
     //estruturar parametros que van a llegar en la busqueda lo estamos sacando del req.query
     //es opcional
-    const {searchTerm, sortDesc} = req.query;
+    /*const {searchTerm, sortDesc} = req.query;
   
 
     let response = characterList
@@ -56,7 +73,7 @@ const getAllCharacters = (req = request, res = response) =>{
     
     res.status(200).json({
         characterList: response
-    });
+    });*/
 }
 
 const getCharactersById = (req = request, res = response) => {
